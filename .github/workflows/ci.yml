@@ -1,0 +1,20 @@
+name: CI Workflow
+on:
+  workflow_run:
+    workflows: [CI Workflow (Frontend), CI Workflow (Backend)]
+    types:
+      - completed
+
+jobs:
+  sonarcloud:
+    timeout-minutes: 10
+    name: Send a message so slack
+    runs-on: ubuntu-latest
+    needs: [rspec, jest]
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - run: echo "CI worked 🚀"
