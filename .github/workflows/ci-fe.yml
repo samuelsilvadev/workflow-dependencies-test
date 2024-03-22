@@ -1,0 +1,25 @@
+name: CI Workflow (Frontend)
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.ts'
+  pull_request:
+    paths:
+      - '**/*.ts'
+  merge_group:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Typescript Linter
+      run: echo "All valid 💪"

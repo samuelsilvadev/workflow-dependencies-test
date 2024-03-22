@@ -1,0 +1,29 @@
+name: CI Workflow (Backend)
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.py'
+  pull_request:
+    paths:
+      - '**/*.py'
+  merge_group:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-lint:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Python Linter
+        uses: sunnysid3up/python-linter@master
+        with:
+          source: "backend"
+          mypy-options: "--ignore-missing-imports --show-error-codes"
