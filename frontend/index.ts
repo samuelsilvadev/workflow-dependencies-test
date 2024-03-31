@@ -1,1 +1,1 @@
-console.log("Hello world from typescript world - 1")
+console.log("Hello world from typescript world - 2")
