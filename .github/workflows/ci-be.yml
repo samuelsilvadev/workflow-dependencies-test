@@ -11,6 +11,7 @@ on:
 
 jobs:
   python-lint:
+    if: ${{ inputs.has_be_changes }}
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
