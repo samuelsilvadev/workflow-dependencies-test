@@ -1,15 +1,13 @@
 name: CI Workflow (Frontend)
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*.ts'
-  pull_request:
-    paths:
-      - '**/*.ts'
-  merge_group:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      has_fe_changes:
+        required: true
+        type: boolean
+      has_be_changes:
+        required: true
+        type: boolean
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -1,15 +1,13 @@
 name: CI Workflow (Backend)
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '**/*.py'
-  pull_request:
-    paths:
-      - '**/*.py'
-  merge_group:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      has_fe_changes:
+        required: true
+        type: boolean
+      has_be_changes:
+        required: true
+        type: boolean
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
