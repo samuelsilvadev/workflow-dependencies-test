@@ -40,3 +40,9 @@ jobs:
           pylint $(git ls-files '*.py')
           deactivate
         working-directory: ${{ github.workspace }}/backend
+
+  by-pass:
+    if: ${{ !inputs.has_be_changes }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Bypass CI BE due to the lack of changes."
