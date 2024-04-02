@@ -42,15 +42,15 @@ jobs:
     needs: [changed_fe_files, changed_be_files]
     uses: ./.github/workflows/ci-be.yml
     with:
-      has_be_changes: ${{ needs.changed_be_files.outputs.any_changed == 'true' }}
-      has_fe_changes: ${{ needs.changed_fe_files.outputs.any_changed == 'true' }}
+      has_be_changes: ${{ needs.changed_be_files.outputs.any_changed == 'true' || github.ref == 'refs/heads/main' }}
+      has_fe_changes: ${{ needs.changed_fe_files.outputs.any_changed == 'true' || github.ref == 'refs/heads/main' }}
 
   fe-ci:
     needs: [changed_fe_files, changed_be_files]
     uses: ./.github/workflows/ci-fe.yml
     with:
-      has_be_changes: ${{ needs.changed_be_files.outputs.any_changed == 'true' }}
-      has_fe_changes: ${{ needs.changed_fe_files.outputs.any_changed == 'true' }}
+      has_be_changes: ${{ needs.changed_be_files.outputs.any_changed == 'true' || github.ref == 'refs/heads/main' }}
+      has_fe_changes: ${{ needs.changed_fe_files.outputs.any_changed == 'true' || github.ref == 'refs/heads/main' }}
 
   sonarcloud:
     needs: [fe-ci, be-ci]
