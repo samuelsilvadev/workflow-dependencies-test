@@ -33,6 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get all changed backend files
+        id: changed_be_files
         uses: tj-actions/changed-files@v44
         with:
           files: |
