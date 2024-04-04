@@ -52,12 +52,12 @@ jobs:
       has_be_changes: ${{ needs.changed_be_files.outputs.any_changed == 'true' || github.ref == 'refs/heads/main' }}
       has_fe_changes: ${{ needs.changed_fe_files.outputs.any_changed == 'true' || github.ref == 'refs/heads/main' }}
 
-  sonarcloud:
+  slack-message:
     needs: [fe-ci, be-ci]
     timeout-minutes: 10
     name: Send a message so slack
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    if: always() && ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v4
         with:
