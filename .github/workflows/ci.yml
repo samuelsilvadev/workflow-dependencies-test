@@ -57,7 +57,7 @@ jobs:
     timeout-minutes: 10
     name: Send a message so slack
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    if: always() && ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v4
         with:
